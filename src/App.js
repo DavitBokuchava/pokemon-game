@@ -1,39 +1,60 @@
 import React from 'react';
-//import logo from './logo.svg';
+import { cards } from './cards/index';
 import bg2 from './assets/bg2.jpg';
 import bg3 from './assets/bg3.jpg';
-import Header from './components/header/Header';
-import Layout from './components/layout/Layout';
-import Footer from './components/footer/Footer';
-import './index.css';
+import Header from './components/Header';
+import Layout from './components/Layout';
+import Footer from './components/Footer';
+import st from'./app.module.css';
+import PockemonCard from './components/PockemonCard';
 //import './App.css';
 
-function App() {
-  //const [urlBg, setUrlBg] = React.useState({})
-  const title = 'This is title';
-  const descr ='This is Description!'; 
+function App() { 
+  const  title = 'This is title'
   const colorBg = '#99FFFF';
-
+  React.useEffect(()=>{
+    console.log(cards)
+  },[])
   return (
-    <div className="App">
-       <Header title = { title } descr = { descr } />
+    <>
+       <Header title = { title} descr = 'This is Description!' />
         <Layout 
-          title = { title } 
-          descr = { descr } 
-          urlBg = {bg2}  />
+          title = {title} 
+          urlBg = {bg2}  >
+            <p>In the game two players face off against one another, 
+              one side playing as "blue", the other as "red" on a 3x3 grid.
+              Each player has five cards in a hand and the aim is to capture the opponent's cards 
+              by turning them into the player's own color of red or blue.</p>
+          </Layout>
           <Layout 
-          title = { title } 
-          descr = { descr }
-          colorBg = { colorBg }  />
+          title = "Cards" 
+          colorBg = { colorBg } 
+           >
+            <div className = {st.flex}>
+              {
+                cards.map((item,index)=>< PockemonCard key = {index} {...item}/>)
+              }
+            </div>
+          </Layout>
           <Layout 
-          title = { title } 
-          descr = { descr }
-          urlBg = {bg3}
-          colorBg = { colorBg }  />
+          title = {title}
+          urlBg = {bg3} >
+            <p>To win, a majority of the total ten cards played 
+              (including the one card that is not placed on the board)
+               must be of the player's card color. To do this, the player 
+               must capture cards by placing a card adjacent to an opponent's card 
+               whereupon the 'ranks' of the sides where the two cards touch will be compared. 
+               If the rank of the opponent's card is higher than the player's card, 
+               the player's card will be captured and turned into the opponent's color. 
+              If the player's rank is higher, the opponent's card will be captured and changed into 
+              the player's color instead. </p>
+          </Layout>
        <Footer/>
       
-    </div>
+    </>
   );
 }
 
 export default App;
+
+

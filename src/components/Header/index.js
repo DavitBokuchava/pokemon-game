@@ -1,6 +1,7 @@
-import style from './styleFooter.module.css'
+import style from './headerStyle.module.css'
+
 const Header = (props)=>{
-const {title, descr} = props;
+const { title, descr } = props;
     return (
         <>
         <header className={style.root}>
