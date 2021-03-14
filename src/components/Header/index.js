@@ -1,12 +1,12 @@
-import style from './headerStyle.module.css'
+import st from './header.module.css'
 
 const Header = (props)=>{
 const { title, descr } = props;
     return (
         <>
-        <header className={style.root}>
-            <div className={style.forest}></div>
-            <div className={style.container}>
+        <header className={st.root}>
+            <div className={st.forest}></div>
+            <div className={st.container}>
                 <h1>{title}</h1>
                 <p>{descr}</p>
             </div>

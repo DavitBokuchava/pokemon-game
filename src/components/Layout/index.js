@@ -1,4 +1,4 @@
-import s from './styleLayout.module.css';
+import s from './layout.module.css';
 
 
 function sFn(a,b){

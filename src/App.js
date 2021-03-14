@@ -32,7 +32,13 @@ function App() {
            >
             <div className = {st.flex}>
               {
-                cards.map((item,index)=>< PockemonCard key = {index} {...item}/>)
+                cards.map((item)=>< PockemonCard 
+                  key = {item.id} 
+                  name = {item.name} 
+                  img = {item.img} 
+                  id = {item.id} 
+                  type = {item.type} 
+                  values =  {item.values} />)
               }
             </div>
           </Layout>

@@ -1,13 +1,13 @@
 
 import React from 'react'
-import style from './pockemonCard.module.css'
+import style from './card.module.css'
 import cardBackSide  from './assets/card-back-side.jpg'
 
 const PockemonCard = ({name, img, id, type, values})=>{
     const [isActive,setActive] = React.useState(false);
     const handleClick = ()=>{
         //setActive(true)
-       return  setActive(!isActive); // i changed logic to change side of card  on per click 
+       return  setActive(val=> !val); // i changed logic to change side of card  on per click 
     }
 
     return (
