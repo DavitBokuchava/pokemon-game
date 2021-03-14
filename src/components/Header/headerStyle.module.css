@@ -12,7 +12,7 @@
 .root::before {
     content: '';
     position: fixed;
-    background: url('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a83c9ee4-6981-4ba7-8955-4ceac8f9778f/Stars.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210310%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210310T222213Z&X-Amz-Expires=86400&X-Amz-Signature=c1debe1fb650a447270f5e30ed45cb6300936aff81a8127b361c32ab6433f3ac&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Stars.svg%22');
+    background: url('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/a83c9ee4-6981-4ba7-8955-4ceac8f9778f/Stars.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210312T173904Z&X-Amz-Expires=86400&X-Amz-Signature=4aea9e26419d2c0e1774850296914cefb27b3382de119ffe2837e9f860ea844a&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Stars.svg%22');
     background-attachment: fixed;
     width: 100%;
     min-height: 100vh;
@@ -35,7 +35,7 @@
     position: absolute;
     bottom: -300px;
     left: 0;
-    background: url("https://s3.us-west-2.amazonaws.com/secure.notion-static.com/25bb5944-e49b-4e34-b4fd-374d5a7598ea/Trees.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210310%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210310T222305Z&X-Amz-Expires=86400&X-Amz-Signature=4ff6e2c39495d4c8662d823aec8a999c83df1ed6b8948356e33443a23cc55afe&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Trees.svg%22") bottom left repeat-x;
+    background: url('https://s3.us-west-2.amazonaws.com/secure.notion-static.com/25bb5944-e49b-4e34-b4fd-374d5a7598ea/Trees.svg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210312%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210312T173730Z&X-Amz-Expires=86400&X-Amz-Signature=4abe1f7e6be2646b850e616ee742d4c686741fb82ae4fff9127c8a60b1c810ae&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Trees.svg%22') bottom left repeat-x;
     background-size: cover;
     width: 100%;
     height: 80%;
