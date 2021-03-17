@@ -1,7 +1,6 @@
-import st from './header.module.css'
-
+import st from './header.module.css';
 const Header = (props)=>{
-const { title, descr } = props;
+const { title, descr, handlePage } = props;
     return (
         <>
         <header className={st.root}>
@@ -9,7 +8,9 @@ const { title, descr } = props;
             <div className={st.container}>
                 <h1>{title}</h1>
                 <p>{descr}</p>
+                <button onClick = {handlePage&&(()=>handlePage("GamePage"))} > PLAY </button>
             </div>
+            
         </header>
         </>)
 }
