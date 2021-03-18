@@ -1,46 +1,22 @@
 
 import React from 'react';
-import st from './style.module.css';
-import PockemonCard from '../../components/PockemonCard';
-import { cards } from '../../cards/index';
 import Layout from '../../components/Layout';
+import st from './style.module.css';
 
-const  GamePage =  ({children})=> { 
-    const [newCards,setCards] = React.useState([...cards])
-    function addActiveTocard(id){
-        
-        return setCards(prev=>([...prev.filter(el=>{
-            if(el.id === id){
-                 el['isActive'] = el.hasOwnProperty("isActive")   ? !el['isActive'] : true;
-              }
-              return true;
-            }
-          )]));
-    }
+const  ContactPage =  ()=> { 
+
+ // I used inline trigger  onClick event, is it acceptable?
 return (
-    <>
+     <> 
         <Layout 
-            title = "Game Place" >
-            <div className = {st.flex}>
-              {
-                newCards.map((item)=>< PockemonCard 
-                  onClick = {()=>console.log("avoooeeee")}
-                  key = {item.id} 
-                  name = {item.name} 
-                  img = {item.img} 
-                  id = {item.id} 
-                  type = {item.type} 
-                  values =  {item.values}
-                  addActiveTocard = { addActiveTocard }
-                  isActive = {!!item.isActive === true ? item.isActive : ''} />)
-              }
-            </div>
+            title = "Contact Page" >
+            
           </Layout>
-</>
+     </>
     )
  }
 
-export default GamePage;
+export default ContactPage;
 
 
 /*   Можете ли вы проверить код middleware моего проекта   на nodejs,

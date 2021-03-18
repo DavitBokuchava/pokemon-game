@@ -1,18 +1,15 @@
 
-import React from 'react'
-import style from './card.module.css'
-import cardBackSide  from './assets/card-back-side.jpg'
-
-const PockemonCard = ({name, img, id, type, values})=>{
-    const [isActive,setActive] = React.useState(false);
-    const handleClick = ()=>{
-        //setActive(true)
-       return  setActive(val=> !val); // i changed logic to change side of card  on per click 
-    }
-
+import React from 'react';
+import style from './card.module.css';
+import cardBackSide  from './assets/card-back-side.jpg';
+import cls  from 'classnames';
+// /`${style.pokemonCard} ${!!isActive === true ? style.active : ''}`
+const PockemonCard = ({name, img, id, type, values, addActiveTocard, isActive})=>{
     return (
-        <div className={style.root} onClick = {handleClick}>
-            <div className={`${style.pokemonCard} ${isActive ? style.active : ''}`}>
+        <div className={style.root} onClick = {()=>addActiveTocard(id)}>
+            <div className={ cls(style.pokemonCard,{
+                [style.active] : isActive,
+            })}>
                 <div className={style.cardFront}>
                     <div className={`${style.wrap} ${style.front}`}>
                         <div className={`${style.pokemon} ${style[type]}`}>

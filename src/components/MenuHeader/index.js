@@ -4,17 +4,17 @@ import Menu from './Menu';
 import Navbar from './Navbar';
 
 
-const  MenuHeader =  ()=> { 
-const [menu, setMenu] = React.useState(false);
+const  MenuHeader =  ({bgActive})=> { 
+const [isOpen, setOpen] = React.useState(null);
+//const [menu, setMenu] = React.useState(false);
 const handleMenu = ()=>{
-    console.log("Click ...")
-    return setMenu(a=> !a);
+    return setOpen(a=> !a);
 }
  
 return (
      <>
-        <Menu menu = { menu} setMenu = {setMenu} />
-        <Navbar menu = { menu} setMenu = {setMenu} handleMenu = {handleMenu} />
+        <Menu isOpen = { isOpen } />
+        <Navbar isOpen = { isOpen } bgActive = {bgActive} handleMenu = {handleMenu} />
      </>
     )
  }

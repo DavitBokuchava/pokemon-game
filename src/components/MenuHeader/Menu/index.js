@@ -1,42 +1,60 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import st from './style.module.css';
-import clss from 'classnames/bind';
+import clss from 'classnames';
 
-const Menu = ({menu,setMenu})=>{
-    let clxName = clss.bind(st)
-    let clsn = clxName({
-        menuContainer : true,
-        active:menu,
-        deactivate: !menu // maybe it's not usefull
-      });
+const links = [
+    {
+        path:"/",
+        pathName:"HOME"
+    },
+    {
+        path:"/game",
+        pathName:"Game"
+    },
+    {
+        path:"/about",
+        pathName:"ABOUT"
+    },
+    {
+        path:"/contact",
+        pathName:"CONTACT"
+    }
+]
+
+const Menu = ({isOpen})=>{
+
+    // let clxName = clss.bind(st)
+    // let clsn = clxName({
+    //     menuContainer : true,
+    //     active: isOpen === true,
+    //     deactivate: isOpen === false // maybe it's not usefull
+    //   });
     return (<>   
-        <div className={clsn}>
+        <div className={clss(st.menuContainer, {
+            [st.active] : isOpen === true,
+            [st.deactive] : isOpen === false
+        })}>
         <div className={st.overlay} />
             <div className={st.menuItems}>
                 <ul>
-                <li>
-                    <a href="#welcome">
-                    HOME
-                    </a>
-                </li>
-                <li>
-                    <a href="#game">
-                    GAME
-                    </a>
-                </li>
-                <li>
-                    <a href="#about">
-                    ABOUT
-                    </a>
-                </li>
-                <li>
-                    <a href="#contact">
-                    CONTACT
-                    </a>
-                </li>
+                {links.map((a,i)=>(
+                <li key = {i} >
+                    <Link to={a.path}>
+                    {a.pathName}
+                    </Link>
+                </li>))}
                 </ul>
             </div>
         </div>
     </>)
 }
 export default Menu;
+/*
+
+{links.map((a,i)=>(<li key = {i} >
+                    <a href={links.path}>
+                    {links.pathName}
+                    </a>
+                </li>))}
+// */
