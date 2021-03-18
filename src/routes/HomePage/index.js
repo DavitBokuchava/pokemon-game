@@ -4,11 +4,8 @@ import bg2 from '../../assets/bg2.jpg';
 import bg3 from '../../assets/bg3.jpg';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
-import Footer from '../../components/Footer';
-import MenuHeader from '../../components/MenuHeader'
 import st from'./style.module.css';
 import PockemonCard from '../../components/PockemonCard';
-//import './App.css';
 
 function HomePage({handlePage}) { 
   const [newCards,setCards] = React.useState([...cards])
