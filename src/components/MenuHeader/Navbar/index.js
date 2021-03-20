@@ -1,22 +1,29 @@
+import clss from 'classnames/';
 import st from './style.module.css';
-import clss from 'classnames/bind';
 
-const Navbar = ({menu, handleMenu})=>{
-    let clxName = clss.bind(st)
-    let clsn = clxName({
-        menuButton : true,
-        active:menu,
-      });
+
+const Navbar = ({isOpen,bgActive = false, handleMenu})=>{
+    // let clxName = clss.bind(st)
+    // let clsn = clxName({
+    //     menuButton : true,
+    //     e:menu,
+    //   });id={st.root}
     return (
         <>
-            <nav className={st.root}>
+            <nav  className={
+                clss(st.root,{
+                    [st.bgActive]:bgActive
+                })
+            }>
                 <div className={st.navWrapper}>
                     <p className={st.brand}>
                     LOGO
                     </p>
-                    <a href = '/#' className={clsn} >
+                    <div  className={clss(st.menuButton, {
+                        [st.active] : isOpen
+                    })} >
                     <span onClick = {handleMenu} />
-                    </a>
+                    </div>
                 </div>
             </nav>
         </>

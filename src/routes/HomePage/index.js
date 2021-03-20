@@ -4,25 +4,30 @@ import bg2 from '../../assets/bg2.jpg';
 import bg3 from '../../assets/bg3.jpg';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
-import Footer from '../../components/Footer';
-import MenuHeader from '../../components/MenuHeader'
 import st from'./style.module.css';
 import PockemonCard from '../../components/PockemonCard';
-//import './App.css';
 
 function HomePage({handlePage}) { 
+  const [newCards,setCards] = React.useState([...cards])
   const  title = 'This is title'
   const colorBg = '#99FFFF';
-  React.useEffect(()=>{
-    console.log(cards)
-  },[])
+  function addActiveTocard(id){
+
+    return setCards(prev=>([...prev.filter(el=>{
+      if(el.id === id){
+           el['isActive'] = el.hasOwnProperty("isActive")   ? !el['isActive'] : true;
+        }
+        return true;
+      }
+    )]));
+  }
   return (
     <>
-        <MenuHeader/>
+        
        <Header title = { title} descr = 'This is Description!' handlePage = {handlePage} />
         <Layout 
-          title = {title} 
-          urlBg = {bg2}  >
+          title = { title } 
+          urlBg = { bg2 }  >
             <p>In the game two players face off against one another, 
               one side playing as "blue", the other as "red" on a 3x3 grid.
               Each player has five cards in a hand and the aim is to capture the opponent's cards 
@@ -34,13 +39,16 @@ function HomePage({handlePage}) {
            >
             <div className = {st.flex}>
               {
-                cards.map((item)=>< PockemonCard 
+                newCards.map((item)=>< PockemonCard 
+                  onClick = {()=>console.log("avoooeeee")}
                   key = {item.id} 
                   name = {item.name} 
                   img = {item.img} 
                   id = {item.id} 
                   type = {item.type} 
-                  values =  {item.values} />)
+                  values =  {item.values}
+                  addActiveTocard = { addActiveTocard }
+                  isActive = {!!item.isActive === true ? item.isActive : ''} />)
               }
             </div>
           </Layout>
@@ -57,7 +65,7 @@ function HomePage({handlePage}) {
               If the player's rank is higher, the opponent's card will be captured and changed into 
               the player's color instead. </p>
           </Layout>
-       <Footer/>
+       
       
     </>
   );
@@ -66,3 +74,10 @@ function HomePage({handlePage}) {
 export default HomePage;
 
 
+//     let arr = [];
+//     newCards.map(el=>{
+         
+//       return el.id === id ? arr.push({...a,el['isActive'] : el.hasOwnProperty("isActive")   ? !el['isActive'] : true}) :arr.push(a);
+//     })
+//  //console.log(arr)
+//    return setCards([...arr]);
