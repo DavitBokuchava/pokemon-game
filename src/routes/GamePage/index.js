@@ -2,37 +2,76 @@
 import React from 'react';
 import st from './style.module.css';
 import PockemonCard from '../../components/PockemonCard';
-import { cards } from '../../cards/index';
+import { uniqCardsList } from '../../cards/index';
 import Layout from '../../components/Layout';
+import database from '../../service/firebase';
+import { v4 as uuidv4 } from 'uuid';
 
-const  GamePage =  ({children})=> { 
-    const [newCards,setCards] = React.useState([...cards])
-    function addActiveTocard(id){
-        
-        return setCards(prev=>([...prev.filter(el=>{
-            if(el.id === id){
-                 el['isActive'] = el.hasOwnProperty("isActive")   ? !el['isActive'] : true;
-              }
-              return true;
-            }
-          )]));
+
+const  GamePage =  ()=> { 
+    
+    const [bool,setBool] = React.useState(false);
+    const [pokemons,setPokemons] = React.useState({})
+    
+    function addCardToDB(){
+        let key = uuidv4();
+        let index =  Math.floor(Math.random() * Math.floor(uniqCardsList.length));
+        database.ref('pokemons/' + key).set(uniqCardsList[index]);
+        return setBool(true)
     }
+    function addActiveTocard({uniq,id}){
+       return  setPokemons(prevState => {
+            return Object.entries(prevState).reduce((acc, item) => {
+                const pokemon = {...item[1]};
+                if (pokemon.id === id && item[0] === uniq) {
+                    pokemon.isActive = pokemon.hasOwnProperty('isActive') ? !pokemon.isActive : true;
+                    database.ref('pokemons/' + uniq).update(pokemon);
+                    //setBool(true)
+                };
+        
+                acc[item[0]] = pokemon;
+                return acc;
+            }, {});
+        });
+        
+    }
+    React.useEffect(()=>{
+        return database.ref('pokemons').once('value',(snapshot)=>{
+            return  setPokemons(snapshot.val())
+        });
+    },[]);
+
+    React.useEffect(()=>{
+        if(bool){
+            return database.ref('pokemons').once('value',(snapshot)=>{
+                setPokemons(snapshot.val());
+                return   setBool(false);
+        });}
+    },[bool]);
+
+
+
 return (
     <>
         <Layout 
             title = "Game Place" >
+            
+           <div className = {st.flex}>
+            <button onClick = {()=>addCardToDB()} >ADD CARD </button>
+           </div>
             <div className = {st.flex}>
               {
-                newCards.map((item)=>< PockemonCard 
+                Object.entries(pokemons).map(([key,{name,img,id,type,values,isActive}])=>< PockemonCard 
                   onClick = {()=>console.log("avoooeeee")}
-                  key = {item.id} 
-                  name = {item.name} 
-                  img = {item.img} 
-                  id = {item.id} 
-                  type = {item.type} 
-                  values =  {item.values}
+                  key = {key}
+                  uniq = {key} 
+                  name = {name} 
+                  img = {img} 
+                  id = {id} 
+                  type = {type} 
+                  values =  {values}
                   addActiveTocard = { addActiveTocard }
-                  isActive = {!!item.isActive === true ? item.isActive : ''} />)
+                  isActive = {!!isActive === true ? isActive : ''} />)
               }
             </div>
           </Layout>
@@ -42,6 +81,17 @@ return (
 
 export default GamePage;
 
+
+// function addActiveTocard(id){
+        
+//     return setCards(prev=>([...prev.filter(el=>{
+//         if(el.id === id){
+//              el['isActive'] = el.hasOwnProperty("isActive")   ? !el['isActive'] : true;
+//           }
+//           return true;
+//         }
+//       )]));
+// }
 
 /*   Можете ли вы проверить код middleware моего проекта   на nodejs,
       чтобы получить отфильтрованные данные и из postgresql,

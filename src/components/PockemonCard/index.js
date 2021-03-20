@@ -4,9 +4,9 @@ import style from './card.module.css';
 import cardBackSide  from './assets/card-back-side.jpg';
 import cls  from 'classnames';
 // /`${style.pokemonCard} ${!!isActive === true ? style.active : ''}`
-const PockemonCard = ({name, img, id, type, values, addActiveTocard, isActive})=>{
+const PockemonCard = ({uniq,name, img, id, type, values, addActiveTocard, isActive})=>{
     return (
-        <div className={style.root} onClick = {()=>addActiveTocard(id)}>
+        <div className={style.root} onClick = {()=>addActiveTocard({uniq,id})}>
             <div className={ cls(style.pokemonCard,{
                 [style.active] : isActive,
             })}>

@@ -10,10 +10,11 @@ const [isOpen, setOpen] = React.useState(null);
 const handleMenu = ()=>{
     return setOpen(a=> !a);
 }
+
  
 return (
      <>
-        <Menu isOpen = { isOpen } />
+        <Menu isOpen = { isOpen } handleMenu = { handleMenu } />
         <Navbar isOpen = { isOpen } bgActive = {bgActive} handleMenu = {handleMenu} />
      </>
     )
