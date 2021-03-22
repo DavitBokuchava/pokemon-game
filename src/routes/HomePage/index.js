@@ -1,26 +1,12 @@
 import React from 'react';
-import { cards } from '../../cards/index';
 import bg2 from '../../assets/bg2.jpg';
 import bg3 from '../../assets/bg3.jpg';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
-import st from'./style.module.css';
-import PockemonCard from '../../components/PockemonCard';
 
 function HomePage({handlePage}) { 
-  const [newCards,setCards] = React.useState([...cards])
   const  title = 'This is title'
-  const colorBg = '#99FFFF';
-  function addActiveTocard(id){
 
-    return setCards(prev=>([...prev.filter(el=>{
-      if(el.id === id){
-           el['isActive'] = el.hasOwnProperty("isActive")   ? !el['isActive'] : true;
-        }
-        return true;
-      }
-    )]));
-  }
   return (
     <>
         
@@ -32,25 +18,6 @@ function HomePage({handlePage}) {
               one side playing as "blue", the other as "red" on a 3x3 grid.
               Each player has five cards in a hand and the aim is to capture the opponent's cards 
               by turning them into the player's own color of red or blue.</p>
-          </Layout>
-          <Layout 
-          title = "Cards" 
-          colorBg = { colorBg } 
-           >
-            <div className = {st.flex}>
-              {
-                newCards.map((item)=>< PockemonCard 
-                  onClick = {()=>console.log("avoooeeee")}
-                  key = {item.id} 
-                  name = {item.name} 
-                  img = {item.img} 
-                  id = {item.id} 
-                  type = {item.type} 
-                  values =  {item.values}
-                  addActiveTocard = { addActiveTocard }
-                  isActive = {!!item.isActive === true ? item.isActive : ''} />)
-              }
-            </div>
           </Layout>
           <Layout 
           title = {title}

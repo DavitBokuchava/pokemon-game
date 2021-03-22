@@ -22,7 +22,7 @@ const links = [
     }
 ]
 
-const Menu = ({isOpen})=>{
+const Menu = ({isOpen, handleMenu})=>{
 
     // let clxName = clss.bind(st)
     // let clsn = clxName({
@@ -40,7 +40,7 @@ const Menu = ({isOpen})=>{
                 <ul>
                 {links.map((a,i)=>(
                 <li key = {i} >
-                    <Link to={a.path}>
+                    <Link to={a.path} onClick = {handleMenu&&(()=>handleMenu(val=>!val))}>
                     {a.pathName}
                     </Link>
                 </li>))}

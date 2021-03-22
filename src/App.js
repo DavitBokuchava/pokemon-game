@@ -4,7 +4,7 @@ import {
   Route,
   Switch,
   Redirect } from 'react-router-dom';
-import cls from 'classnames'
+import cls from 'classnames';
 import HomePage from './routes/HomePage';
 import GamePage from './routes/GamePage'
 import ContactPage from './routes/ContactPage';
@@ -15,7 +15,8 @@ import Footer from './components/Footer';
 import style from './app.module.css'
 
 
-const App = () => { 
+
+ const App = () => { 
   let match = useRouteMatch('/');
   console.log(match)
  return (
