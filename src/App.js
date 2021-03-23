@@ -12,7 +12,9 @@ import AboutPage from './routes/AboutPage';
 import MenuHeader from './components/MenuHeader';
 import NotFoundPage from './routes/NotFoundPage';
 import Footer from './components/Footer';
-import style from './app.module.css'
+import style from './app.module.css';
+import { FirebaseContext}  from './context/firebaseContext'
+import Firebase  from './service/firebase'
 
 
 
@@ -20,6 +22,7 @@ import style from './app.module.css'
   let match = useRouteMatch('/');
   console.log(match)
  return (
+   < FirebaseContext.Provider value = {new Firebase()}>
       <Switch>
         <Route path='/404'  component = { NotFoundPage } />
         <Route>
@@ -43,6 +46,7 @@ import style from './app.module.css'
             </>
         </Route>
       </Switch>
+      </FirebaseContext.Provider>
  )
 }
 
