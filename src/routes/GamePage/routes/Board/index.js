@@ -6,10 +6,17 @@ import PokemonComponent from '../../../../components/PlayerBoard';
 import s from './style.module.css';
 
 const BoardPage = () => {
-    const [board,setBoard] = useState([]);
-    const [playerTwo,setPlayerTwo] = useState([]);
-    const [choice, setChoiceCard] = useState(null)
     const contText = useContext(PokemonContext);
+    const [board,setBoard] = useState([]);
+    const [playerOne,setPlayerOne] = useState(()=>{
+        return Object.values(contText.pokemons).map(pokemon=>({
+            ...pokemon,
+            possession:"green"
+        }))
+    })
+    const [playerTwo,setPlayerTwo] = useState([]);
+    const [choiceCard, setChoiceCard] = useState(null)
+    
     const history = useHistory()
     console.log("....../// ", contText)
     if(Object.keys(contText.pokemons).length === 0){
@@ -21,15 +28,36 @@ const BoardPage = () => {
          setBoard(request.data)
          const resPlayerTwo = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
         const requestPlayerTwo = await resPlayerTwo.json();
-         setPlayerTwo(requestPlayerTwo.data)
+         setPlayerTwo(()=>{
+             return requestPlayerTwo.data.map(pokemon=>({
+                ...pokemon,
+                possession:"red"
+             }))
+         })
     },[])
     useEffect(()=>{
-        console.log(board,playerTwo)
-    },[board,playerTwo])
+        console.log(playerOne,playerTwo,choiceCard)
+    },[playerOne,playerTwo,choiceCard])
 
-    const handleClickOnBoard = (a)=>{
-        console.log(a, "hfgjkghkhlkj")
-        return console.log(choice, " CARDS")
+    const handleClickOnBoard = async (position)=>{
+        //console.log(a, "hfgjkghkhlkj")
+        if(choiceCard){
+            const params = {
+                position,
+                card:choiceCard,
+                board
+            };
+            const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(params),
+            });
+            const request = await res.json();
+            console.log(request, " === reque")
+            setBoard(request.data)
+        };
     }
 
     return (
@@ -37,7 +65,8 @@ const BoardPage = () => {
 		    <div className={s.playerOne}>
             {
                    <PokemonComponent 
-                   cards = {Object.values(contText.pokemons)}
+                   player = {1}
+                   cards = {playerOne}
                     onClickCard = {(card)=> setChoiceCard(card)}
                    />
                        
@@ -51,7 +80,7 @@ const BoardPage = () => {
                      onClick = {()=>  !el.card&&handleClickOnBoard(el.position)}
                      >
                         {
-                            el.card&&<PokemonCard {...el} minimize/>
+                            el.card&&<PokemonCard {...el.card} isActive   minimize/>
                            
                         }
                      </div>)
@@ -59,7 +88,8 @@ const BoardPage = () => {
                 
             </div>
             <div className={s.playerTwo}>
-               <PokemonComponent 
+               <PokemonComponent
+               player = {2} 
                cards = {playerTwo}
                onClickCard = {(card)=> setChoiceCard(card)}/>
             </div>

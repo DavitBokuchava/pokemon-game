@@ -2,7 +2,7 @@ import s from './style.module.css';
 import cn from 'classnames';
 import { useState } from "react";
 import PokemonCard from '../PockemonCard';
-const PlayerBoard = ({cards,onClickCard })=>{
+const PlayerBoard = ({cards,onClickCard,player, possission })=>{
     const [isSelected,setSelected] = useState(null)
     //name,img,id,type,values
     return(
@@ -16,10 +16,12 @@ const PlayerBoard = ({cards,onClickCard })=>{
                     })}
                     onClick = {()=>{
                         setSelected(card.id);
-                        onClickCard&&onClickCard(card)}}>
+                        onClickCard&&onClickCard({
+                            player,
+                            ...card})}}>
                     
-                        < PokemonCard 
-                        
+                        < PokemonCard
+                        possission 
                         className = {s.card}
                         key = {card.id}
                         name = {card.name}

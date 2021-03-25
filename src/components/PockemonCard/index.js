@@ -4,7 +4,7 @@ import s from './style.module.css';
 //import cardBackSide  from './assets/card-back-side.jpg';
 import cn  from 'classnames';
 // /`${style.pokemonCard} ${!!isActive === true ? style.active : ''}`
-const PokemonCard = ({className,minimize,name,img,id,type,values,isActive,selected, onClickCard})=>{
+const PokemonCard = ({className,minimize,name,img,id,type,values,isActive,selected, onClickCard,possession})=>{
     return (
         <div className={cn(className, s.pokemonCard, 
             {[s.active]:isActive,
@@ -14,7 +14,7 @@ const PokemonCard = ({className,minimize,name,img,id,type,values,isActive,select
         >
             <div className={s.cardFront}>
                 <div className={cn(s.wrap, s.front)}>
-                    <div className={cn(s.pokemon, s[type])}>
+                    <div className={cn(s.pokemon, s[type])} style = {{backgroundColor:possession}}>
                         <div className={s.values}>
                             <div className={cn(s.count, s.top)}>{values.top}</div>
                             <div className={cn(s.count, s.right)}>{values.right}</div>
