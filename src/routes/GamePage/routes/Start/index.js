@@ -3,6 +3,7 @@ import React from 'react';
 import { useHistory,useRouteMatch} from 'react-router-dom'
 import st from './style.module.css';
 import PokemonCard from '../../../../components/PockemonCard';
+import Layout from '../../../../components/Layout';
 //import { uniqCardsList } from '../../../../cards/index';
 //import { v4 as uuidv4 } from 'uuid';
 import { FirebaseContext}  from '../../../../context/firebaseContext';
@@ -47,35 +48,34 @@ const  StartPage =  ()=> {
                 ...pr[key],
                 selected:!pr[key].selected
             }
-        }))
+        }));
+      return console.log(Object.keys(pokemonsContext.pokemons).length)
     };
     return (
         <>
                 
             <div className = {st.buttonWrap}>
                 <button onClick = {()=>toBoard()}
-                    disabled={Object.keys(pokemonsContext.pokemons).length>5} > Start Game </button>
+                    disabled={Object.keys(pokemonsContext.pokemons).length<5} > Start Game </button>
             </div>
                 <div className = {st.flex}>
                 {
                     Object.entries(pokemons).map(([key,{name,img,id,type,values,selected}])=>
                         < PokemonCard 
-                        
                         className = {st.card}
                         key = {key}
                         name = {name}
                         img = {img}
-                         
                         id = {id} 
                         type = {type} 
                         values =  {values}
-                        isActive = {false}
+                        isActive = {true}
                         isSelected = {selected}
-                        onClickCard = {()=>{
-                            if(Object.keys(pokemonsContext.pokemons).length<5 || selected){
-                                return handleSelected(key)
-                            }
-                            }} />)
+                        onClickCard =  {()=>{
+                                if(Object.keys(pokemonsContext.pokemons).length<5 || selected){
+                                    return handleSelected(key)
+                                }
+                                }} />)
                     }
                 
             </div>
@@ -85,6 +85,12 @@ const  StartPage =  ()=> {
 
 export default StartPage;
 
+
+// {()=>{
+//     if(Object.keys(pokemonsContext.pokemons).length<5 || selected){
+//         return handleSelected(key)
+//     }
+//     }}
     // function addCardToDB(){
     //     let key = uuidv4();
     //     let index =  Math.floor(Math.random() * Math.floor(uniqCardsList.length));

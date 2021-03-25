@@ -4,13 +4,14 @@
     /* flex-wrap: wrap; */
     grid-template-columns: auto auto auto;
     grid-gap: 40px;
+    height: calc(100vw / 1.71);
 }
 .buttonWrap {
     text-align: center;
     padding: 2rem;
 }
 .card {
-    width:100%;
+    width:50%;
     height:380px;
     cursor: pointer;
 }

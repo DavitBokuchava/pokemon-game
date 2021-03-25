@@ -4,13 +4,13 @@ import s from './style.module.css';
 //import cardBackSide  from './assets/card-back-side.jpg';
 import cn  from 'classnames';
 // /`${style.pokemonCard} ${!!isActive === true ? style.active : ''}`
-const PokemonCard = ({className,name,img,id,type,values,minimize,isActive, onClickCard})=>{
+const PokemonCard = ({className,minimize,name,img,id,type,values,isActive,selected, onClickCard})=>{
     return (
         <div className={cn(className, s.pokemonCard, 
-            {[s.active]: true,
-            [s.selected]:false
+            {[s.active]:isActive,
+            [s.selected]:selected
             })}
-        
+            onClick = {()=>onClickCard()}
         >
             <div className={s.cardFront}>
                 <div className={cn(s.wrap, s.front)}>
