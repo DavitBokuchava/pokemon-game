@@ -8,7 +8,7 @@ const PokemonCard = ({className,name,img,id,type,values,minimize,isActive, onCli
     return (
         <div className={cn(className, s.pokemonCard, 
             {[s.active]: true,
-            [s.selected]:true
+            [s.selected]:false
             })}
         
         >

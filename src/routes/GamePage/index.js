@@ -11,13 +11,25 @@ import {PokemonContext} from '../../context/pokemonContext';
 
 
 const GamePage = () => {
+    const [selectedPokemons,setSelectedPokemons] = React.useState({});
     const match = useRouteMatch();
-    const handlePokemonsSelected = ()=>{
-        console.log( "././././.")
+    const handlePokemonsSelected = (key,pokemon)=>{
+        console.log( "././././." , pokemon, key)
+        setSelectedPokemons(prev=>{
+            if(prev[key]){
+                const copyState = {...prev};
+                delete copyState[key]
+                return copyState;
+            }
+            return {
+                ...prev,
+                [key]:pokemon
+            }
+        })
     }
     return (
         <PokemonContext.Provider value = {{
-            pokemon:[],
+            pokemons:selectedPokemons,
             onSelectedPokemons:handlePokemonsSelected
         }}>
             <Switch>

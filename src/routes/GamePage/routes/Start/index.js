@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useHistory,useRouteMatch} from 'react-router-dom'
 import st from './style.module.css';
 import PokemonCard from '../../../../components/PockemonCard';
 //import { uniqCardsList } from '../../../../cards/index';
@@ -12,7 +13,7 @@ const  StartPage =  ()=> {
     const firebase = React.useContext(FirebaseContext);
     const pokemonsContext = React.useContext(PokemonContext);
     const [pokemons,setPokemons] = React.useState({});
-    const [isSelected,setIsSelected] = React.useState(false);
+    const history = useHistory()
     console.log(pokemonsContext)
     
     React.useEffect(()=>{
@@ -29,14 +30,18 @@ const  StartPage =  ()=> {
         console.log(PokemonCard, " === POKEMONS")
         //return getPokemons()
     },[]);
-
+    function toBoard(){
+        history.push('/game/board')
+    }
     async function getPokemons (){
         const pkmns = await await firebase.getPokemonsOnce();
         console.log(pkmns)
           setPokemons(pkmns)
     }
     function handleSelected (key){
-        return setPokemons(pr=>({
+        const pokemon = {...pokemons[key]}
+        pokemonsContext.onSelectedPokemons(key,pokemon)
+        setPokemons(pr=>({
             ...pr,
             [key]:{
                 ...pr[key],
@@ -48,7 +53,8 @@ const  StartPage =  ()=> {
         <>
                 
             <div className = {st.buttonWrap}>
-                <button > Start Game </button>
+                <button onClick = {()=>toBoard()}
+                    disabled={Object.keys(pokemonsContext.pokemons).length>5} > Start Game </button>
             </div>
                 <div className = {st.flex}>
                 {
@@ -57,14 +63,19 @@ const  StartPage =  ()=> {
                         
                         className = {st.card}
                         key = {key}
+                        name = {name}
                         img = {img}
-                        name = {name} 
+                         
                         id = {id} 
                         type = {type} 
                         values =  {values}
                         isActive = {false}
                         isSelected = {selected}
-                        onClickCard = {()=> handleSelected(key)} />)
+                        onClickCard = {()=>{
+                            if(Object.keys(pokemonsContext.pokemons).length<5 || selected){
+                                return handleSelected(key)
+                            }
+                            }} />)
                     }
                 
             </div>
