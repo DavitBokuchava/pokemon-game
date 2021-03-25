@@ -11,7 +11,7 @@
     padding: 2rem;
 }
 .card {
-    width:50%;
+    width:100%;
     height:380px;
     cursor: pointer;
 }

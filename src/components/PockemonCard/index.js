@@ -10,7 +10,7 @@ const PokemonCard = ({className,minimize,name,img,id,type,values,isActive,select
             {[s.active]:isActive,
             [s.selected]:selected
             })}
-            onClick = {()=>onClickCard()}
+            onClick = {()=>onClickCard&&onClickCard()}
         >
             <div className={s.cardFront}>
                 <div className={cn(s.wrap, s.front)}>
