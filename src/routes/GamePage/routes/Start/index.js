@@ -27,7 +27,7 @@ const  StartPage =  ()=> {
         return getPokemons()
     },[]);
     React.useEffect(()=>{
-        console.log(PokemonCard, " === POKEMONS")
+        console.log(PokemonCard, pokemons, " === POKEMONS")
         //return getPokemons()
     },[]);
     function toBoard(){

@@ -21,6 +21,7 @@
     transition: .6s .1s;
     transform: rotateY(180deg);
 }
+
 .pokemonCard.active {
     animation: flipFront 1000ms 300ms forwards;
 }
@@ -35,8 +36,7 @@
 }
 
 .pokemonCard.selected {
-    margin-top: -20px;
-    margin-bottom: 20px;
+    margin-top: -40px;
 }
 
 .cardFront,
@@ -88,7 +88,7 @@
 
 .wrap.back {
     z-index: -1;
-    background-image: url('./assets/card-back-side.jpg');
+    background-image: url(./assets/card-back-side.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

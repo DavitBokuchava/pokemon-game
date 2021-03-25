@@ -1,6 +1,11 @@
+import {useContext} from 'react';
+import { PokemonContext } from '../../../../context/pokemonContext';
 import s from './style.module.css';
 
 const BoardPage = () => {
+    const contText = useContext(PokemonContext);
+    console.log("....../// ", contText)
+
     return (
         <div className={s.root}>
 						<div className={s.playerOne}>
