@@ -52,7 +52,7 @@ const BoardPage = () => {
                      >
                         {
                             el.card&&<PokemonCard {...el} minimize/>
-                           // el.position
+                           
                         }
                      </div>)
                 )}
