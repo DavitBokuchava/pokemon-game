@@ -17,7 +17,7 @@ const GamePage = () => {
     }
     return (
         <PokemonContext.Provider value = {{
-            pokemons:[],
+            pokemon:[],
             onSelectedPokemons:handlePokemonsSelected
         }}>
             <Switch>

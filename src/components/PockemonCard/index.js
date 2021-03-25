@@ -4,11 +4,11 @@ import s from './style.module.css';
 //import cardBackSide  from './assets/card-back-side.jpg';
 import cn  from 'classnames';
 // /`${style.pokemonCard} ${!!isActive === true ? style.active : ''}`
-const PockemonCard = ({className,minimize,uniq,name, img, id, type, values, selected,isSelected, onClickCard})=>{
+const PokemonCard = ({className,name,img,id,type,values,minimize,isActive, onClickCard})=>{
     return (
         <div className={cn(className, s.pokemonCard, 
             {[s.active]: true,
-            [s.selected]:isSelected
+            [s.selected]:true
             })}
         
         >
@@ -45,4 +45,4 @@ const PockemonCard = ({className,minimize,uniq,name, img, id, type, values, sele
     )
 }
 
-export default PockemonCard;
+export default PokemonCard;

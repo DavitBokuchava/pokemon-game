@@ -1,7 +1,7 @@
 
 import React from 'react';
 import st from './style.module.css';
-import PockemonCard from '../../../../components/PockemonCard';
+import PokemonCard from '../../../../components/PockemonCard';
 //import { uniqCardsList } from '../../../../cards/index';
 //import { v4 as uuidv4 } from 'uuid';
 import { FirebaseContext}  from '../../../../context/firebaseContext';
@@ -22,8 +22,12 @@ const  StartPage =  ()=> {
         return firebase.getPokemonSocketOff();
     },[]);
     React.useEffect(()=>{
-        console.log(PockemonCard)
+        //console.log(PockemonCard, " === POKEMONS")
         return getPokemons()
+    },[]);
+    React.useEffect(()=>{
+        console.log(PokemonCard, " === POKEMONS")
+        //return getPokemons()
     },[]);
 
     async function getPokemons (){
@@ -39,7 +43,37 @@ const  StartPage =  ()=> {
                 selected:!pr[key].selected
             }
         }))
-    }
+    };
+    return (
+        <>
+                
+            <div className = {st.buttonWrap}>
+                <button > Start Game </button>
+            </div>
+                <div className = {st.flex}>
+                {
+                    Object.entries(pokemons).map(([key,{name,img,id,type,values,selected}])=>
+                        < PokemonCard 
+                        
+                        className = {st.card}
+                        key = {key}
+                        img = {img}
+                        name = {name} 
+                        id = {id} 
+                        type = {type} 
+                        values =  {values}
+                        isActive = {false}
+                        isSelected = {selected}
+                        onClickCard = {()=> handleSelected(key)} />)
+                    }
+                
+            </div>
+        </>
+    )
+ }
+
+export default StartPage;
+
     // function addCardToDB(){
     //     let key = uuidv4();
     //     let index =  Math.floor(Math.random() * Math.floor(uniqCardsList.length));
@@ -63,36 +97,3 @@ const  StartPage =  ()=> {
     //     });
         
     // }
-
-
-
-
-return (
-    <>
-            
-           <div className = {st.buttonWrap}>
-            <button > Start Game </button>
-           </div>
-            <div className = {st.flex}>
-              {
-                Object.entries(pokemons).map(([key,{name,img,id,type,values,selected}])=>
-                    < PockemonCard 
-                    isSelected = {isSelected}
-                    className = {st.card}
-                    key = {key}
-                    uniq = {key} 
-                    name = {name} 
-                    img = {img} 
-                    id = {id} 
-                    type = {type} 
-                    values =  {values}
-                    isActive = {true}
-                    onClickCard = {()=> handleSelected(key)} />)
-                }
-            </div>
-</>
-    )
- }
-
-export default StartPage;
-
