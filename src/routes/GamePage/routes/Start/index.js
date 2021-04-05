@@ -1,62 +1,67 @@
 
 import React from 'react';
-import { useHistory,useRouteMatch} from 'react-router-dom'
+import { useHistory} from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+import { getPokemonss, pokemonsLoading } from '../../../../store/pokemons.js';
 import st from './style.module.css';
 import PokemonCard from '../../../../components/PockemonCard';
-import Layout from '../../../../components/Layout';
-//import { uniqCardsList } from '../../../../cards/index';
-//import { v4 as uuidv4 } from 'uuid';
-import { FirebaseContext}  from '../../../../context/firebaseContext';
-import {PokemonContext}  from '../../../../context/pokemonContext'
+
+import { FirebaseContext }  from '../../../../context/firebaseContext';
+import { PokemonContext }  from '../../../../context/pokemonContext'
 
 
 const  StartPage =  ()=> { 
     const firebase = React.useContext(FirebaseContext);
     const pokemonsContext = React.useContext(PokemonContext);
     const [pokemons,setPokemons] = React.useState({});
-    const history = useHistory()
-    console.log(pokemonsContext)
+    const history = useHistory();
+   // const pokemonsState = useSelector(selectPokemonsLoading)
+    const dispatch = useDispatch();
     
     React.useEffect(()=>{
-        firebase.getPokemonSocket= ((pokemons)=>{
-            setPokemons(pokemons)
+        pokemonsContext.onDeletePokemons();
+        firebase.getPokemonSocket= ((pkmns)=>{
+            console.log(pkmns, " pkmns  from on listening DB")
+            setPokemons(pkmns);
+            dispatch(getPokemonss(pkmns))
         })
-        return firebase.getPokemonSocketOff();
+        return ()=>firebase.getPokemonSocketOff();
     },[]);
+    
     React.useEffect(()=>{
-        //console.log(PockemonCard, " === POKEMONS")
+        dispatch(pokemonsLoading(true))
+        //dispatch(getPokemonss(pokemons))
         return getPokemons()
     },[]);
-    React.useEffect(()=>{
-        console.log(PokemonCard, pokemons, " === POKEMONS")
-        //return getPokemons()
-    },[]);
+   
+
     function toBoard(){
         history.push('/game/board')
     }
     async function getPokemons (){
-        const pkmns = await await firebase.getPokemonsOnce();
-        console.log(pkmns)
+        const pkmns = await  firebase.getPokemonsOnce();
+        //console.log(pkmns, pokemonsContext.playerOnePokemons, "=== pokemonsContext.pokemons")
           setPokemons(pkmns)
+          dispatch(getPokemonss(pkmns))
     }
     function handleSelected (key){
         const pokemon = {...pokemons[key]}
-        pokemonsContext.onSelectedPokemons(key,pokemon)
-        setPokemons(pr=>({
+        pokemonsContext.onPlayerOnePokemons(key,pokemon) // add to context state 
+        return setPokemons(pr=>({
             ...pr,
             [key]:{
                 ...pr[key],
                 selected:!pr[key].selected
             }
         }));
-      return console.log(Object.keys(pokemonsContext.pokemons).length)
+     
     };
     return (
         <>
                 
             <div className = {st.buttonWrap}>
                 <button onClick = {()=>toBoard()}
-                    disabled={Object.keys(pokemonsContext.pokemons).length<5} > Start Game </button>
+                    disabled={Object.keys(pokemonsContext.playerOnePokemons).length<5}> Start Game </button>
             </div>
                 <div className = {st.flex}>
                 {
@@ -70,12 +75,12 @@ const  StartPage =  ()=> {
                         type = {type} 
                         values =  {values}
                         isActive = {true}
-                        isSelected = {selected}
+                        selected = {selected}
                         onClickCard =  {()=>{
-                                if(Object.keys(pokemonsContext.pokemons).length<5 || selected){
-                                    return handleSelected(key)
+                            if(Object.keys(pokemonsContext.playerOnePokemons).length<5 || selected){
+                                return handleSelected(key)
                                 }
-                                }} />)
+                            }} />)
                     }
                 
             </div>
@@ -114,3 +119,10 @@ export default StartPage;
     //     });
         
     // }
+    // React.useEffect(()=>{
+    //     console.log(PokemonCard, pokemons, " === POKEMONS")
+    //     //return getPokemons()
+    // },[]);
+  //  import Layout from '../../../../components/Layout';
+//import { uniqCardsList } from '../../../../cards/index';
+//import { v4 as uuidv4 } from 'uuid';
