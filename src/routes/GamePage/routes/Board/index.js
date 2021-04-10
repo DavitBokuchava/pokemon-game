@@ -38,7 +38,7 @@ const BoardPage = () => {
         let plOneCount = plOne.length;
         let plTwoCount = plTwo.length;
         console.log(plOneCount,plTwoCount)
-        brd.map(el=>{
+        brd.forEach(el=>{
             if(el.card.possession === "red"){
                return plTwoCount++;
             }
