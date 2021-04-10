@@ -54,9 +54,9 @@ const BoardPage = () => {
             return setSide( Math.ceil(Math.random() * 2))
         },3000)
         return ()=> clearTimeout(startPlay);
-    },[])
-    useEffect(  ()=>{
-        async function fetchData() { const res = await fetch('https://reactmarathon-api.netlify.app/api/board');
+    },[]);
+    async function fetchData() { 
+        const res = await fetch('https://reactmarathon-api.netlify.app/api/board');
         const request = await res.json();
         setBoard(request.data);
         setSteps(request.data.length)
@@ -68,7 +68,10 @@ const BoardPage = () => {
                 ...pokemon,
                 possession:"red"
              }))
-         })}
+         })
+    }
+    useEffect(  ()=>{
+        
          fetchData()
     },[])
 
