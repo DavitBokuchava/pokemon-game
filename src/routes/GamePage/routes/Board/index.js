@@ -70,10 +70,10 @@ const BoardPage = () => {
              }))
          })
     }
-    useEffect(  ()=>{
+    useEffect(()=>{
         
          fetchData()
-    },[])
+    },[fetchData])
 
     const handleClickOnBoard = async (position)=>{
         if(choiceCard){
