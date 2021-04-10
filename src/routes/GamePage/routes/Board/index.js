@@ -55,7 +55,7 @@ const BoardPage = () => {
         },3000)
         return ()=> clearTimeout(startPlay);
     },[])
-    useEffect( async ()=>{
+    useEffect(  ()=>{
         async function fetchData() { const res = await fetch('https://reactmarathon-api.netlify.app/api/board');
         const request = await res.json();
         setBoard(request.data);
