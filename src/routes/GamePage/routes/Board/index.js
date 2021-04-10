@@ -40,10 +40,10 @@ const BoardPage = () => {
         console.log(plOneCount,plTwoCount)
         brd.map(el=>{
             if(el.card.possession === "red"){
-                plTwoCount++;
+               return plTwoCount++;
             }
             if(el.card.possession === "green"){
-                plOneCount++;
+                return plOneCount++;
             }
         });
 
