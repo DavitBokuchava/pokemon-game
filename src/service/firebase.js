@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/database'
+// import { FirebaseContext } from '../context/firebaseContext';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDQfvgWXrgSAbnkOPvytMMpn-hDitlYPdk",
@@ -38,5 +39,5 @@ const firebaseConfig = {
 
 // export const fire = firebase;
 // const  database = fire.database();
-   
-export default Firebase;
+const FirebaseClass = new Firebase()
+export default FirebaseClass;
